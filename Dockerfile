@@ -25,4 +25,6 @@ RUN cd /src/iperf ; ./configure ; make; make install
 #Fix problem running tcpdump in privledged container
 RUN mv /usr/sbin/tcpdump /usr/bin/tcpdump; ln -s /usr/bin/tcpdump /usr/sbin/tcpdump
 
+#overwrite default perfsonar/testpoint supervisord.conf file
+COPY supervisord.conf /etc/supervisord.conf
 CMD /usr/bin/supervisord -c /etc/supervisord.conf
