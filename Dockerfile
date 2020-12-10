@@ -25,7 +25,7 @@ RUN cd /src/iperf ; ./configure ; make; make install
 # install tstat in case it turns out to be useful
 RUN cd /src; wget http://tstat.polito.it/download/tstat-3.1.1.tar.gz
 RUN cd /src; tar xvzf tstat-3.1.1.tar.gz
-RUN cd /src/tstat-3.1.1 ./configure;  make; make install
+RUN cd /src/tstat-3.1.1; ./configure;  make; make install
 
 #Fix problem running tcpdump in privledged container
 RUN mv /usr/sbin/tcpdump /usr/bin/tcpdump; ln -s /usr/bin/tcpdump /usr/sbin/tcpdump
