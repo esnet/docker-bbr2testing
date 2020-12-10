@@ -2,8 +2,8 @@
 
 FROM perfsonar/testpoint:latest
 
-RUN yum -y install git wget 
 RUN yum -y groupinstall "Development tools"
+RUN yum -y install git wget libpcap-devel
 
 RUN mkdir /src
 
@@ -21,6 +21,11 @@ RUN cd /src/sysstat; ./configure; make; make install
 RUN cd /src; git clone -b bbr2-testing https://github.com/esnet/iperf.git
 #this will install in /usr/local, and not overwrite default iperf3
 RUN cd /src/iperf ; ./configure ; make; make install
+
+# install tstat in case it turns out to be useful
+RUN cd /src; wget http://tstat.polito.it/download/tstat-3.1.1.tar.gz
+RUN cd /src; tar xvzf tstat-3.1.1.tar.gz
+RUN cd /src/tstat-3.1.1 ./configure;  make; make install
 
 #Fix problem running tcpdump in privledged container
 RUN mv /usr/sbin/tcpdump /usr/bin/tcpdump; ln -s /usr/bin/tcpdump /usr/sbin/tcpdump
