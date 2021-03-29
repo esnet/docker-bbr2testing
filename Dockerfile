@@ -3,7 +3,7 @@
 FROM perfsonar/testpoint:latest
 
 RUN yum -y groupinstall "Development tools"
-RUN yum -y install git wget libpcap-devel
+RUN yum -y install git wget libpcap-devel ethtool
 
 RUN mkdir /src
 
